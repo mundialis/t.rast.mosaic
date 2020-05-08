@@ -391,7 +391,12 @@ def main():
     grass.try_remove(registerfile)
 
     grass.message(_("Mosaicing the scenes with method %s ...") % options['method'])
-    grass.run_command('t.rast.aggregate', input=strdsout + '_tmp', output=strdsout, basename=strdsout, granularity=options['granularity'], method=options['method'], quiet=True, nprocs=options['nprocs'])
+    if not options['granularity'] == 'all':
+        grass.run_command('t.rast.aggregate', input=strdsout + '_tmp', output=strdsout, basename=strdsout, granularity=options['granularity'], method=options['method'], quiet=True, nprocs=options['nprocs'])
+    else:
+        rasters = [x.split('|')[0] for x in grass.parse_command('t.rast.list', input=strdsout + '_tmp', flags='u')]
+        grass.run_command('r.series', input=rasters, output=strdsout, method=options['method'])
+        grass.message(_("<%s> created") % strdsout)
 
     # grass.run_command('t.rast.aggregate', input=strdsout + '_tmp', output='Q1' + strdsout, basename='Q1' + strdsout, granularity=options['granularity'], method=options['method'], quiet=True, nprocs=options['nprocs'])
     # grass.run_command('t.rast.aggregate', input=strdsout + '_tmp', output='Q3' + strdsout, basename='Q3' + strdsout, granularity=options['granularity'], method='quart3', quiet=True, nprocs=options['nprocs'])
