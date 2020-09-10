@@ -1,0 +1,21 @@
+# pip related
+sudo apt install python3-pip
+pip3 install sentinelsat
+pip3 install pandas
+pip3 install psutil
+pip3 install GDAL==$(gdal-config --version)
+
+# general addons
+g.extension extension=i.sentinel
+g.extension extension=r.series.lwr
+g.extension extension=i.histo.match
+
+# mundialis addons
+ADDONSURL=$HOME/repositories/actinia-assets/grass-gis-addons  # extensions URL
+g.extension extension=i.sentinel.coverage url=$ADDONSURL/i.sentinel.coverage 
+g.extension extension=i.sentinel.parallel.download url=$ADDONSURL/i.sentinel.parallel.download
+g.extension extension=i.sentinel.import.worker url=$ADDONSURL/i.sentinel.import.worker
+g.extension extension=i.sentinel.mask.worker url=$ADDONSURL/i.sentinel.mask.worker
+g.extension extension=t.sentinel.import url=$ADDONSURL/t.sentinel.import
+g.extension extension=t.sentinel.mask url=$ADDONSURL/t.sentinel.mask
+g.extension extension=t.rast.mosaic url=$ADDONSURL/t.rast.mosaic
