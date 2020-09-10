@@ -9,6 +9,7 @@ pip3 install GDAL==$(gdal-config --version)
 g.extension extension=i.sentinel
 g.extension extension=r.series.lwr
 g.extension extension=i.histo.match
+g.extension extension=i.zero2null
 
 # mundialis addons
 ADDONSURL=$HOME/repositories/actinia-assets/grass-gis-addons  # extensions URL
