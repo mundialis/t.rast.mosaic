@@ -1,14 +1,20 @@
 <h2>DESCRIPTION</h2>
 
-<em>t.rast.mosaic</em> is a GRASS GIS addon Python script to
-remove clouds and tries to fill raster gaps using <b>r.series</b> and <b>r.series.lwr</b> and
-aggregates temporally the maps of a space time raster dataset by a user
-defined granularity using <b>t.rast.aggregate</b>.
+<em>t.rast.mosaic</em> is a GRASS GIS addon Python script to remove 
+clouds and tries to fill raster gaps using <em>r.series</em> and 
+<em>r.series.lwr</em> and aggregates temporally the maps of a space time 
+raster dataset by a user defined granularity using 
+<em>t.rast.aggregate</em>.
+
+<p>Various steps of <em>t.rast.mosaic</em> 
+can be parallelized with the <b>nprocs</b> option. With this option set to &gt; 1, 
+different time steps and scenes are processed in parallel where 
+possible.
 
 <h2>EXAMPLE</h2>
 <div class="code"><pre>
 t.rast.mosaic input=s2_B02_10m output=B02_mosaic clouds=s2clouds cloudbuffer=10 \
-  granularity='1 months' method=median
+  granularity='1 months' method=median nprocs=4
 </pre></div>
 
 <h2>SEE ALSO</h2>
@@ -25,6 +31,7 @@ t.rast.mosaic input=s2_B02_10m output=B02_mosaic clouds=s2clouds cloudbuffer=10 
 <h2>AUTHORS</h2>
 
 Anika Bettge, mundialis, bettge at mundialis.de
+Markus Metz, mundialis, metz at mundialis.de
 
 
 <!--
