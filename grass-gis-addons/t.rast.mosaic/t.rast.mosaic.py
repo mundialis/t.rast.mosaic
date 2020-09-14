@@ -365,13 +365,13 @@ def main():
             title = True
         elif title:
             title = False
-            if not 'Description:' in key:
+            if 'Description:' not in key:
                 title_str = key.replace('|','').strip()
         elif 'Description:' in key:
             desc = True
         elif desc:
             desc = False
-            if not 'Command history:' in key:
+            if 'Command history:' not in key:
                 desc_str = key.replace('|','').strip()
     grass.run_command(
         't.create', output=strdsout + '_tmp', title=("%s gaps(/clouds/shadows) filled" % title_str) if title_str else "",
