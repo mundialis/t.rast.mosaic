@@ -228,13 +228,13 @@ def main():
                 cloud_idx = cloudtimes.index(strdstime)
                 scenes[strdsrast]['clouds'] = cloudrasters[cloud_idx]
             else:
-                grass.warning(_("For %s at %s no clouds found") % (strdsrast, strdstime))
+                grass.warning(_("For <%s> at <%s> no clouds found") % (strdsrast, strdstime))
         if shadows:
             if strdstime in shadowtimes:
                 shadow_idx = shadowtimes.index(strdstime)
                 scenes[strdsrast]['shadows'] = cloudrasters[shadow_idx]
             else:
-                grass.warning(_("For %s at %s no clouds found") %
+                grass.warning(_("For <%s> at <%s> no clouds found") %
                               (strdsrast, strdstime))
     scene_keys = 'raster'
 
