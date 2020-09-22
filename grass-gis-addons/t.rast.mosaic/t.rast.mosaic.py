@@ -440,8 +440,8 @@ def main():
             if 'Command history:' not in key:
                 desc_str = key.replace('|', '').strip()
     grass.run_command('t.create', output=strdsout + '_tmp',
-                      title=("%s gaps(/clouds/shadows) filled" % title_str) if title_str else "",
-                      desc=("%s: gaps(/clouds/shadows) filled" % desc_str) if desc_str else "",
+                      title=("%s gaps(/clouds/shadows) filled" % title_str) if title_str else "mosaic",
+                      desc=("%s: gaps(/clouds/shadows) filled" % desc_str) if desc_str else ("%s: gaps(/clouds/shadows) filled" % title_str) if title_str else "mosaic",
                       quiet=True)
     rm_strds.append(strdsout + '_tmp')
 
