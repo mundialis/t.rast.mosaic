@@ -333,13 +333,12 @@ def main():
             queue_buffer.wait()
 
     # histogramm matching for ALL input scenes at once !
-    # add histogramm matching as an option to t.rast.aggregate 
+    # add histogramm matching as an option to t.rast.aggregate
     # to be applied to the sets of maps to be aggregated
     grass.message(_("Compute histogramm matching ..."))
     nocloudnoshadows_rasters = [val[scene_keys] for key, val in scenes.items()]
     grass.run_command('i.histo.match', input=nocloudnoshadows_rasters,
                       suffix='match', max=options['max'], quiet=True)
-                      # output='match',
     newscenekey = "%s.match" % scene_keys
     for scene_key in scenes:
         scenes[scene_key][newscenekey] = scenes[scene_key][scene_keys] + '.match'
