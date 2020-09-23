@@ -270,6 +270,7 @@ def main():
             for scene_key, num in zip(scenes, range(num_scenes)):
                 grass.message(_("Cloud buffer %d of %d ...") % (num+1, num_scenes))
                 scene = scenes[scene_key]
+                noclouds = scenes[scene_key]['noclouds']
                 noclouds_buf = "%s_noclouds" % scene['raster']
                 scenes[scene_key]['noclouds'] = noclouds_buf
                 rm_rasters.append(noclouds_buf)
@@ -317,6 +318,7 @@ def main():
             for scene_key, num in zip(scenes, range(num_scenes)):
                 grass.message(_("Shadow buffer %d of %d ...") % (num+1, num_scenes))
                 scene = scenes[scene_key]
+                noshadows = scenes[scene_key]['noshadows']
                 noshadows_buf = "%s_noshadows" % scene['raster']
                 scenes[scene_key]['noshadows'] = noshadows_buf
                 rm_rasters.append(noshadows_buf)  # TODO das hier scheint nicht zu funktionieren?!
