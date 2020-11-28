@@ -1,7 +1,6 @@
 # pip related
 sudo apt install python3-pip
 pip3 install sentinelsat
-pip3 install pandas
 pip3 install psutil
 pip3 install GDAL==$(gdal-config --version)
 
