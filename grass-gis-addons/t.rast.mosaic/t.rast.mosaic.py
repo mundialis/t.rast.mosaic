@@ -4,7 +4,7 @@
 #
 # MODULE:       t.rast.mosaic
 #
-# AUTHOR(S):    Anika Bettge <bettge at mundialis.de>
+# AUTHOR(S):    Anika Weinmann <weinmann at mundialis.de>
 #
 # PURPOSE:      Removes clouds, try to fill raster gaps using r.series and
 #               r.series.lwr and aggregates temporally the maps of a space
@@ -122,7 +122,7 @@
 
 #%flag
 #% key: q
-#% description: Use the first quartil additional to the median by patching
+#% description: Use the first quartile additional to the median by patching
 #%end
 
 import atexit
@@ -183,7 +183,7 @@ def test_nprocs():
 
 def main():
 
-    # https://medium.com/sentinel-hub/how-to-create-cloudless-mosaics-37910a2b8fa8
+    # Inspiration: https://medium.com/sentinel-hub/how-to-create-cloudless-mosaics-37910a2b8fa8
 
     global rm_regions, rm_rasters, rm_vectors, rm_strds
     global name, scene_keys
