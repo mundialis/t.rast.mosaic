@@ -20,7 +20,7 @@
 #############################################################################
 
 #%Module
-#% description: removes clouds, try to fill raster gaps using r.series and r.series.lwr and aggregates temporally the maps of a space time raster dataset by a user defined granularity using t.rast.aggregate.
+#% description: Removes clouds, try to fill raster gaps using r.series and r.series.lwr and aggregates temporally the maps of a space time raster dataset by a user defined granularity using t.rast.aggregate.
 #% keyword: temporal
 #% keyword: aggregation
 #% keyword: series
@@ -116,7 +116,7 @@
 #% type: integer
 #% required: no
 #% multiple: no
-#% label: Number of parallel processes to use
+#% label: Number of parallel processes to run
 #% answer: 1
 #%end
 

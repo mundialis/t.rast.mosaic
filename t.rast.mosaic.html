@@ -1,0 +1,47 @@
+<h2>DESCRIPTION</h2>
+
+<em>t.rast.mosaic</em> is a GRASS GIS addon Python script to remove 
+clouds and aims at filling raster gaps using <em>r.series</em> and 
+<em>r.series.lwr</em> (local weighted regression) and aggregates
+temporally the maps of a space time  raster dataset by a user defined
+granularity using  <em>t.rast.aggregate</em>.
+
+<p>
+Various steps of <em>t.rast.mosaic</em> can be run in parallel with the
+<b>nprocs</b> option. With this option set to <tt>&gt; 1</tt>, different
+time steps and scenes are executed in parallel where possible.
+
+<h2>EXAMPLE</h2>
+
+<div class="code"><pre>
+t.rast.mosaic input=s2_B02_10m output=B02_mosaic clouds=s2clouds cloudbuffer=10 \
+  granularity='1 months' method=median nprocs=4
+</pre></div>
+
+<h2>SEE ALSO</h2>
+
+This module needs several
+<a href="https://github.com/mundialis/t.rast.mosaic/blob/main/requirements.sh">requirements</a>
+to be installed.
+
+<p>
+<em>
+<a href="https://grass.osgeo.org/grass-stable/manuals/r.series.html">r.series</a>,
+<a href="r.series.lwr.html">r.series.lwr</a> (addon),
+<a href="https://grass.osgeo.org/grass-stable/manuals/r.patch.html">r.patch</a>,
+<a href="https://grass.osgeo.org/grass-stable/manuals/t.rast.aggregate.html">t.rast.aggregate</a>,
+<a href="https://grass.osgeo.org/grass-stable/manuals/r.mapcalc.html">r.mapcalc</a>
+</em>
+
+
+<h2>AUTHORS</h2>
+
+Anika Weinmann, <a href="https://www.mundialis.de/">mundialis</a>
+<br>
+Markus Metz, <a href="https://www.mundialis.de/">mundialis</a>
+
+
+<!--
+<p>
+<i>Last changed: $Date$</i>
+-->
