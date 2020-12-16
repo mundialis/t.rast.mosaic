@@ -253,8 +253,8 @@ def main():
                 noclouds = "%s_noclouds" % scene['raster']
             scenes[scene_key]['noclouds'] = noclouds
             rm_rasters.append(noclouds)
-            expression = ("%s = if( isnull(%s) ||| %s == 0, %s, null() )"
-                          % (noclouds, scene['clouds'], scene['clouds'],
+            expression = ("%s = if( isnull(%s), %s, null() )"
+                          % (noclouds, scene['clouds'],
                           scene['raster']))
 
             # grass.run_command('r.mapcalc', expression=expression, quiet=True)
