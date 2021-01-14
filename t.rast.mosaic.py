@@ -150,8 +150,6 @@ def cleanup():
         'quiet': True,
         'stderr': nuldev
     }
-    # sorting reversely allows the base rasters to be deleted first
-    rm_rasters.sort(reverse=True)
     for rmr in rm_regions:
         if rmr in [x for x in grass.parse_command('g.list', type='region')]:
             grass.run_command(
