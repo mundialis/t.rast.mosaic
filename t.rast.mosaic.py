@@ -232,7 +232,7 @@ def main():
         if shadows:
             if strdstime in shadowtimes:
                 shadow_idx = shadowtimes.index(strdstime)
-                scenes[strdsrast]['shadows'] = cloudrasters[shadow_idx]
+                scenes[strdsrast]['shadows'] = shadowrasters[shadow_idx]
             else:
                 grass.warning(_("For <%s> at <%s> no clouds found") %
                               (strdsrast, strdstime))
@@ -254,8 +254,7 @@ def main():
             scenes[scene_key]['noclouds'] = noclouds
             rm_rasters.append(noclouds)
             expression = ("%s = if( isnull(%s), %s, null() )"
-                          % (noclouds, scene['clouds'],
-                          scene['raster']))
+                          % (noclouds, scene['clouds'], scene['raster']))
 
             # grass.run_command('r.mapcalc', expression=expression, quiet=True)
             module_mapcalc = Module('r.mapcalc', expression=expression,
@@ -301,10 +300,8 @@ def main():
                 noshadows = "%s_noshadows" % scene['raster']
             rm_rasters.append(noshadows)
             scenes[scene_key]['noshadows'] = noshadows
-            expression = ("%s = if( isnull(%s) ||| %s == 0, %s, null() )"
-                          % (noshadows, scene['shadows'],
-                          scene['shadows'], scene[old_key]))
-
+            expression = ("%s = if( isnull(%s), %s, null() )"
+                          % (noshadows, scene['shadows'], scene[old_key]))
             # grass.run_command('r.mapcalc', expression=expression, quiet=True)
             module_mapcalc = Module('r.mapcalc', expression=expression,
                                     run_=False)
@@ -312,7 +309,7 @@ def main():
         queue_mapcalc.wait()
 
         # buffer
-        if options['cloudbuffer']:
+        if options['shadowbuffer']:
             # parallelize
             queue_buffer = ParallelModuleQueue(nprocs=nprocs)
             for scene_key, num in zip(scenes, range(num_scenes)):
