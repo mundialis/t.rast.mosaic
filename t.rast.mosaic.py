@@ -213,12 +213,12 @@ def main():
         cloudrasters = [x.split('|')[0] for x in grass.parse_command('t.rast.list', input=clouds, flags='u')]
         cloudtimes = [x.split('|')[2] for x in grass.parse_command('t.rast.list', input=clouds, flags='u')]
         if len(strdsrasters) != len(cloudrasters):
-            grass.fatal(_("Number of raster in <input> strds and <clouds> strds are not the same."))
+            grass.warning(_("Number of raster in <input> strds and <clouds> strds are not the same."))
     if shadows:
         shadowrasters = [x.split('|')[0] for x in grass.parse_command('t.rast.list', input=shadows, flags='u')]
         shadowtimes = [x.split('|')[2] for x in grass.parse_command('t.rast.list', input=shadows, flags='u')]
         if len(strdsrasters) != len(shadowrasters):
-            grass.fatal(_("Number of raster in <input> strds and <shadows> strds are not the same."))
+            grass.warning(_("Number of raster in <input> strds and <shadows> strds are not the same."))
 
     scenes = dict()
     for strdsrast, strdstime in zip(strdsrasters, strdstimes):
