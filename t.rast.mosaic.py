@@ -86,7 +86,7 @@
 #% key: method
 #% type: string
 #% required: yes
-#% multiple: no
+#% multiple: yes
 #% options: average,count,median,mode,minimum,min_raster,maximum,max_raster,stddev,range,sum,variance,diversity,slope,offset,detcoeff,quart1,quart3,perc90,quantile,skewness,kurtosis
 #% description: Aggregate operation to be performed on the raster maps
 #% answer: median
@@ -459,14 +459,18 @@ def main():
 
     grass.message(_("Mosaicing the scenes with method %s ...") % options['method'])
     if not options['granularity'] == 'all':
-        grass.run_command('t.rast.aggregate', input=strdsout + '_tmp',
-                          output=strdsout, basename=strdsout,
-                          granularity=options['granularity'],
-                          method=options['method'], quiet=True,
-                          nprocs=options['nprocs'])
+        for method in options['method'].split(","):
+            m_strdsout = strdsout if not "," in options['method'] else f"{strdsout}{method}"
+            grass.run_command('t.rast.aggregate', input=strdsout + '_tmp',
+                              output=strdsout, basename=strdsout,
+                              granularity=options['granularity'],
+                              method=method, quiet=True,
+                              nprocs=options['nprocs'])
     else:
         rasters = [x.split('|')[0] for x in grass.parse_command('t.rast.list', input=strdsout + '_tmp', flags='u')]
-        grass.run_command('r.series', input=rasters, output=strdsout,
+        out = strdsout
+        import pdb; pdb.set_trace()
+        grass.run_command('r.series', input=rasters, output=out,
                           method=options['method'])
         grass.message(_("<%s> created") % strdsout)
 
