@@ -158,12 +158,12 @@ def cleanup():
         if grass.find_file(name=rmv, element='vector')['file']:
             grass.run_command(
                 'g.remove', type='vector', name=rmv, **kwargs)
-    # reverse order to remove base rasters (created from histogram matching)
-    # after derived rasters
-    for rmrast in reversed(rm_rasters):
+    for rmrast in rm_rasters:
         if grass.find_file(name=rmrast, element='raster')['file']:
+            kwargs['flags'] += "b"
             grass.run_command(
                 'g.remove', type='raster', name=rmrast, **kwargs)
+            kwargs['flags'] = 'f'
     for rmtr in rm_strds:
         strdsrasters = [x.split('|')[0] for x in grass.parse_command('t.rast.list', input=rmtr, flags='u')]
         for rmr in rmtr:
