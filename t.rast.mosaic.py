@@ -158,7 +158,9 @@ def cleanup():
         if grass.find_file(name=rmv, element='vector')['file']:
             grass.run_command(
                 'g.remove', type='vector', name=rmv, **kwargs)
-    for rmrast in rm_rasters:
+    # reverse order to remove base rasters (created from histogram matching)
+    # after derived rasters
+    for rmrast in reversed(rm_rasters):
         if grass.find_file(name=rmrast, element='raster')['file']:
             grass.run_command(
                 'g.remove', type='raster', name=rmrast, **kwargs)
@@ -318,7 +320,7 @@ def main():
                 noshadows = scenes[scene_key]['noshadows']
                 noshadows_buf = "%s_noshadows" % scene['raster']
                 scenes[scene_key]['noshadows'] = noshadows_buf
-                rm_rasters.append(noshadows_buf)  # TODO das hier scheint nicht zu funktionieren?!
+                rm_rasters.append(noshadows_buf)
                 if float(options['shadowbuffer']) < 0:
                     buffer = float(options['shadowbuffer'])
                 else:
@@ -478,7 +480,6 @@ def main():
     #     formular = "(%s - 1.5*(%s - %s) )" % (q1, q3, q1)
     #     grass.run_command("r.mapcalc", expression="Q1_Q3Q1_%s = if (%s < 0, 0, %s)" % (q1.replace("Q1", ""), formular, formular))
     #     grass.message("<Q1_Q3Q1_%s> created" % q1.replace("Q1", ""))
-
 
 if __name__ == "__main__":
     options, flags = grass.parser()
